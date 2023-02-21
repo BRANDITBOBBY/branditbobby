@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US"
+	prefix="og: https://ogp.me/ns#" >
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="profile" href="http://www.branditprintit.com.ng">
+<link rel="pingback" href="https://http://www.branditprintit.com.ng">
+<link rel="shortcut icon" href="http://www.branditprintit.com.ng" />
+<!--<link rel="preload" href="http://www.branditprintit.com.ng" />-->
+<title>- Branditprintit.com.ng Home of Printing and branding in Nigeria</title>
+
+		<!-- All in One SEO Pro 4.2.6.1 - aioseo.com -->
+		<meta name="description" content="IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using." />
+		<meta name="robots" content="max-image-preview:large" />
+		<link rel="canonical" href="http://www.branditprintit.com.ng/" />
+		<meta name="generator" content="All in One SEO Pro (AIOSEO) 4.2.6.1 " />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:site_name" content="IsItWP - Free WordPress Theme Detector" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="IsItWP - Free WordPress Theme Detector" />
+		<meta property="og:description" content="IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using." />
+		<meta property="og:url" content="http://www.branditprintit.com.ng/" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@isitwp" />
+		<meta name="twitter:title" content="IsItWP - Free WordPress Theme Detector" />
+		<meta name="twitter:description" content="IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using." />
+		<meta name="twitter:creator" content="@isitwp" />
+		<meta name="twitter:label1" content="Written by" />
+		<meta name="twitter:data1" content="Editorial Team" />
+		<script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https:\/\/www.isitwp.com\/#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/www.isitwp.com\/#listItem","position":1,"item":{"@type":"WebPage","@id":"https:\/\/www.isitwp.com\/","name":"Home","description":"IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using.","url":"https:\/\/www.isitwp.com\/"},"nextItem":"https:\/\/www.isitwp.com\/#listItem"},{"@type":"ListItem","@id":"https:\/\/www.isitwp.com\/#listItem","position":2,"item":{"@type":"WebPage","@id":"https:\/\/www.isitwp.com\/","name":"Homepage","description":"IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using.","url":"https:\/\/www.isitwp.com\/"},"previousItem":"https:\/\/www.isitwp.com\/#listItem"}]},{"@type":"Organization","@id":"https:\/\/www.isitwp.com\/#organization","name":"IsItWP - Free WordPress Theme Detector","url":"https:\/\/www.isitwp.com\/","sameAs":["https:\/\/twitter.com\/isitwp"]},{"@type":"WebPage","@id":"https:\/\/www.isitwp.com\/#webpage","url":"https:\/\/www.isitwp.com\/","name":"IsItWP - Free WordPress Theme Detector","description":"IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using.","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/www.isitwp.com\/#website"},"breadcrumb":{"@id":"https:\/\/www.isitwp.com\/#breadcrumblist"},"datePublished":"2015-10-19T09:59:19+00:00","dateModified":"2021-08-10T18:21:26+00:00"},{"@type":"WebPage","@id":"https:\/\/www.isitwp.com\/#webpage","url":"https:\/\/www.isitwp.com\/","name":"IsItWP - Free WordPress Theme Detector","description":"IsItWP is a free tool that allows you easily detect if a website is using WordPress and what WordPress themes and WordPress plugins they are using.","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/www.isitwp.com\/#website"},"breadcrumb":{"@id":"https:\/\/www.isitwp.com\/#breadcrumblist"},"datePublished":"2015-10-19T09:59:19+00:00","dateModified":"2021-08-10T18:21:26+00:00"},{"@type":"WebSite","@id":"https:\/\/www.isitwp.com\/#website","url":"https:\/\/www.isitwp.com\/","name":"IsItWP - Free WordPress Theme Detector","inLanguage":"en-US","publisher":{"@id":"https:\/\/www.isitwp.com\/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.isitwp.com\/?s={search_term_string}"},"query-input":"required name=search_term_string"}}]}
+		</script>
+		<!-- All in One SEO Pro -->
+
+<link rel='dns-prefetch' href='//www.isitwp.com' />
+<link rel='dns-prefetch' href='//a.omappapi.com' />
+<link rel='dns-prefetch' href='//c6be12.isitwp.com' />
+
+		<!-- This site uses the Google Analytics by MonsterInsights plugin v8.4.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+							<script type="rocketlazyloadscript" src="//www.googletagmanager.com/gtag/js?id=UA-68663830-1"  data-cfasync="false" data-wpfc-render="false" data-rocket-type="text/javascript" async></script>
+			<script type="rocketlazyloadscript" data-cfasync="false" data-wpfc-render="false" data-rocket-type="text/javascript">
+				var mi_version = '8.4.0';
+				var mi_track_user = true;
+				var mi_no_track_reason = '';
+				
+								var disableStrs = [
+										'ga-disable-G-5MF7PM2SZF',
+															'ga-disable-UA-68663830-1',
+									];
+
+				/* Function to detect opted out users */
+				function __gtagTrackerIsOptedOut() {
+					for ( var index = 0; index < disableStrs.length; index++ ) {
+						if ( document.cookie.indexOf( disableStrs[ index ] + '=true' ) > -1 ) {
+							return true;
+						}
+					}
+
+					return false;
+				}
+
+				/* Disable tracking if the opt-out cookie exists. */
+				if ( __gtagTrackerIsOptedOut() ) {
+					for ( var index = 0; index < disableStrs.length; index++ ) {
+						window[ disableStrs[ index ] ] = true;
+					}
+				}
+
+				/* Opt-out function */
+				function __gtagTrackerOptout() {
+					for ( var index = 0; index < disableStrs.length; index++ ) {
+						document.cookie = disableStrs[ index ] + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+						window[ disableStrs[ index ] ] = true;
+					}
+				}
+
+				if ( 'undefined' === typeof gaOptout ) {
+					function gaOptout() {
+						__gtagTrackerOptout();
+					}
+				}
+								window.dataLayer = window.dataLayer || [];
+
+				window.MonsterInsightsDualTracker = {
+					helpers: {},
+					trackers: {},
+				};
+				if ( mi_track_user ) {
+					function __gtagDataLayer() {
+						dataLayer.push( arguments );
+					}
+
+					function __gtagTracker( type, name, parameters ) {
+						if (!parameters) {
+							parameters = {};
+						}
+
+						if (parameters.send_to) {
+							__gtagDataLayer.apply( null, arguments );
+							return;
+						}
+
+						if ( type === 'event' ) {
+															parameters.send_to = monsterinsights_frontend.v4_id;
+								var hookName = name;
+								if ( typeof parameters[ 'event_category' ] !== 'undefined' ) {
+									hookName = parameters[ 'event_category' ] + ':' + name;
+								}
+
+								if ( typeof MonsterInsightsDualTracker.trackers[ hookName ] !== 'undefined' ) {
+									MonsterInsightsDualTracker.trackers[ hookName ]( parameters );
+								} else {
+									__gtagDataLayer( 'event', name, parameters );
+								}
+							
+															parameters.send_to = monsterinsights_frontend.ua;
+								__gtagDataLayer( type, name, parameters );
+													} else {
+							__gtagDataLayer.apply( null, arguments );
+						}
+					}
+					__gtagTracker( 'js', new Date() );
+					__gtagTracker( 'set', {
+						'developer_id.dZGIzZG' : true,
+											} );
+										__gtagTracker( 'config', 'G-5MF7PM2SZF', {"forceSSL":"true"} );
+															__gtagTracker( 'config', 'UA-68663830-1', {"forceSSL":"true"} );
+										window.gtag = __gtagTracker;											(function () {
+							/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+							/* ga and __gaTracker compatibility shim. */
+							var noopfn = function () {
+								return null;
+							};
+							var newtracker = function () {
+								return new Tracker();
+							};
+							var Tracker = function () {
+								return null;
+							};
+							var p = Tracker.prototype;
+							p.get = noopfn;
+							p.set = noopfn;
+							p.send = function (){
+								var args = Array.prototype.slice.call(arguments);
+								args.unshift( 'send' );
+								__gaTracker.apply(null, args);
+							};
+							var __gaTracker = function () {
+								var len = arguments.length;
+								if ( len === 0 ) {
+									return;
+								}
+								var f = arguments[len - 1];
+								if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+									if ( 'send' === arguments[0] ) {
+										var hitConverted, hitObject = false, action;
+										if ( 'event' === arguments[1] ) {
+											if ( 'undefined' !== typeof arguments[3] ) {
+												hitObject = {
+													'eventAction': arguments[3],
+													'eventCategory': arguments[2],
+													'eventLabel': arguments[4],
+													'value': arguments[5] ? arguments[5] : 1,
+												}
+											}
+										}
+										if ( 'pageview' === arguments[1] ) {
+											if ( 'undefined' !== typeof arguments[2] ) {
+												hitObject = {
+													'eventAction': 'page_view',
+													'page_path' : arguments[2],
+												}
+											}
+										}
+										if ( typeof arguments[2] === 'object' ) {
+											hitObject = arguments[2];
+										}
+										if ( typeof arguments[5] === 'object' ) {
+											Object.assign( hitObject, arguments[5] );
+										}
+										if ( 'undefined' !== typeof arguments[1].hitType ) {
+											hitObject = arguments[1];
+											if ( 'pageview' === hitObject.hitType ) {
+												hitObject.eventAction = 'page_view';
+											}
+										}
+										if ( hitObject ) {
+											action = 'timing' === arguments[1].hitType ? 'timing_complete' : hitObject.eventAction;
+											hitConverted = mapArgs( hitObject );
+											__gtagTracker( 'event', action, hitConverted );
+										}
+									}
+									return;
+								}
+
+								function mapArgs( args ) {
+									var arg, hit = {};
+									var gaMap = {
+										'eventCategory': 'event_category',
+										'eventAction': 'event_action',
+										'eventLabel': 'event_label',
+										'eventValue': 'event_value',
+										'nonInteraction': 'non_interaction',
+										'timingCategory': 'event_category',
+										'timingVar': 'name',
+										'timingValue': 'value',
+										'timingLabel': 'event_label',
+										'page' : 'page_path',
+										'location' : 'page_location',
+										'title' : 'page_title',
+									};
+									for ( arg in args ) {
+																				if ( ! ( ! args.hasOwnProperty(arg) || ! gaMap.hasOwnProperty(arg) ) ) {
+											hit[gaMap[arg]] = args[arg];
+										} else {
+											hit[arg] = args[arg];
+										}
+									}
+									return hit;
+								}
+
+								try {
+									f.hitCallback();
+								} catch ( ex ) {
+								}
+							};
+							__gaTracker.create = newtracker;
+							__gaTracker.getByName = newtracker;
+							__gaTracker.getAll = function () {
+								return [];
+							};
+							__gaTracker.remove = noopfn;
+							__gaTracker.loaded = true;
+							window['__gaTracker'] = __gaTracker;
+						})();
+									} else {
+										console.log( "" );
+					( function () {
+							function __gtagTracker() {
+								return null;
+							}
+							window['__gtagTracker'] = __gtagTracker;
+							window['gtag'] = __gtagTracker;
+					} )();
+									}
+			</script>
+				<!-- / Google Analytics by MonsterInsights -->
+		<link rel='stylesheet' media="print" onload="this.media='all'" id='wp-block-library-css'  href='https://www.branditprintit.com.ng/wp-includes/css/dist/block-library/style.min.css?ver=5.8.6' type='text/css' media='all' />
+<link rel='stylesheet' id='amtf-style-css'  href='https://https://www.branditprintit.com.ng/wp-includes/css/dist/block-library/style.min.css?ver=5.8.6' type='text/css' media='all' />
+<script type='text/javascript' id='monsterinsights-frontend-script-js-extra'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/refer\\\/\",\"label\":\"aff\"}]","home_url":"https:\/\/www.isitwp.com","hash_tracking":"false","ua":"UA-68663830-1","v4_id":"G-5MF7PM2SZF"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.branditprintit.com.ng></script>
+<script type='text/javascript' id='jquery-core-js-extra'>
+/* <![CDATA[ */
+var site_vars = {"ajax_url":"https:\/\/www.isitwp.com\/wp-admin\/admin-ajax.php","themeurl":"https:\/\/www.isitwp.com\/wp-content\/themes\/isitwpv2","search_nonce":"3a3409840d"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.branditprintit.com.ng'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.branditprintit.com.ng' defer></script>
+<link rel='shortlink' href='https://www.branditprintit.com.ng/' />
+<link rel="alternate" type="application/json+oembed" href="https://www.branditprintit.com.ng</script>
+<script type="rocketlazyloadscript" src="https://www.branditprintit.com.ng">
+        document.addEventListener('om.Scripts.init', function(event) {
+            event.detail.Scripts.enabled.fonts= false;
+        });
+    </script><script type="rocketlazyloadscript" src="https://www.branditprintit.com.ng">
+    <link rel="dns-prefetch" href="https://www.branditprintit.com.ng">
+    <noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+<body class="home page-template page-template-homepage page-template-homepage-php page page-id-4">
+<div id="page" class="site">
+	<header class="site-header">
+		<div class="container clear">
+			<div class="logo">
+				<a href="https://www.branditprintit.com.ng</span></a>
+			</div>
+			<div class="menu-main"><ul id="menu-main-menu" class="menu clear"><li id="menu-item-216438" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Blog</a></li>
+<li id="menu-item-228025" class="menu-item menu-item-has-children"><a href="#">Popular Guides</a>
+<ul class="sub-menu">
+	<li id="menu-item-450" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Best 
+printing company</a></li>
+	<li id="menu-item-35" class="menu-item"><a href="https://www.branditprintit.com.ng/blog"> </a></li>
+	<li id="menu-item-228026" class="menu-item"><a href="https://www.isitwp.com/how-to-start-a-blog-step-by-step/">How to Start a Blog</a></li>
+	<li id="menu-item-228027" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">How to Make a Website</a></li>
+	<li id="menu-item-228028" class="menu-item"><a href="https://www.isitwp.com/best-email-marketing-services-compared/">Email Marketing</a></li>
+	<li id="menu-item-228029" class="menu-item"><a href="https://www.branditprintit.com.ng/blog</a></li>
+	<li id="menu-item-236295" class="menu-item"><a href="https://www.isitwp.com/best-business-phone-services/">Business Phone Services</a></li>
+	<li id="menu-item-268196" class="menu-item"><a href="https://www.branditprintit.com.ng/blog</a></li>
+	<li id="menu-item-268197" class="menu-item"><a href="https://www.branditprintit.com.ng/blog</a></li>
+</ul>
+</li>
+<li id="menu-item-188231" class="menu-item menu-item-has-children"><a href="https://www.branditprintit.com.ng/blog</a>
+<ul class="sub-menu">
+	<li id="menu-item-228031" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228032" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">HostGator Coupon</a></li>
+	<li id="menu-item-228033" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228034" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228035" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228036" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+</ul>
+</li>
+<li id="menu-item-228037" class="menu-item menu-item-has-children"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a>
+<ul class="sub-menu">
+	<li id="menu-item-228038" class="menu-item"><a href="https://www.branditprintit.com.ng/blog"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229259" class="menu-item"><a href="https://www.isitwp.com/hosting-reviews/free-web-hosting/">Best Free Hosting</a></li>
+	<li id="menu-item-229261" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229740" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229739" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229269" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229270" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229116" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-229260" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-240826" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228040" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228042" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228043" class="menu-item"><a href="https://www.branditprintit.com.ng/blog"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-228045" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+</ul>
+</li>
+<li id="menu-item-219845" class="menu-item menu-item-has-children"><a href="#">Tools</a>
+<ul class="sub-menu">
+	<li id="menu-item-222530" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-227878" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-219848" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-219847" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-227874" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-219846" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-227515" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-227516" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-239180" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-242588" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+	<li id="menu-item-260802" class="menu-item"><a href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a></li>
+</ul>
+</li>
+</ul></div>			<div class="search">
+				<i class="far fa-search white"></i>
+				<i class="far fa-bars white"></i>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+	<div id="fullscreensearch">
+		<div class="closesearch">X</div>
+		<form action="/" method="GET">
+			<input id="search-hd" type="text" value="" placeholder="Search IsItWP..." name="s" class="s search-input" autocomplete="off">
+			<label class="label-si" for="search-hd">Enter Keywords</label>
+		</form>
+	</div>
+		<div id="content" class="clear toolpg">
+    <div class="section tool bg-white">
+        <div class="container">
+            <h1>Find out which websites are <span class="hd-blue">built with WordPress?</span></h1>
+            <div class="info">Get information about their WordPress hosting, WordPress theme, WordPress plugins &amp; more.</div>
+            <div class="form">
+                <label class="label-si" for="search-input">Enter URL</label>
+                <input id="search-input" name="search-input" type="text" placeholder="Enter the Website URL" />
+                <input id="search-submit" type="submit" value="Analyze Website" />
+                <input id="search-act" type="hidden" value="" />
+                <div id="floatingCirclesG"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div>
+                <div class="error_box"></div>
+            </div>
+            <div data-callback="onsolveCallbackIsitwp" id="g_recaptcha" class="g-recaptcha"></div>
+            <div class="short">WordPress powers 43% of all websites including these top brands:</div>
+            <div class="logos">
+                <picture>
+                    <source media="(max-width: 767px)" data-lazy-srcset="https://www.branditprintit.com.ng/blog">
+                    <source media="(min-width: 768px)" data-lazy-srcset="https://www.branditprintit.com.ng/blog">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20920%2040'%3E%3C/svg%3E" alt="" width="920" height="40"  loading="lazy" data-lazy-src="https://www.branditprintit.com.ng/blog"><noscript><img src="https://www.branditprintit.com.ng/blog" alt="" width="920" height="40"  loading="lazy"></noscript>
+                </picture>
+            </div>
+        </div>
+    </div>
+    <div class="section result bg-lt-grey">
+        <div class="container">
+            <div id="results"></div>
+        </div>
+    </div>
+<div class="section start bg-lt-grey">
+    <div class="container">
+        <h2 class="has-undr">Need Help Getting Started with WordPress?</h2>
+                <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x fas fa-pencil-alt"></i><span class="tit">Start a Blog</span><span class="desc">Step by step guide on how to start a blog.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-desktop"></i><span class="tit">Make a Website</span><span class="desc">Beginners guide on how to make a website.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-shopping-cart"></i><span class="tit">Ecommerce</span><span class="desc">Compare the best eCommerce plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x fab fa-wpforms"></i><span class="tit">Forms</span><span class="desc">Compare the best form builder plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-users"></i><span class="tit">Membership</span><span class="desc">Compare the best membership plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-shield-check"></i><span class="tit">Security</span><span class="desc">Compare the best security plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-tachometer"></i><span class="tit">Performance</span><span class="desc">Compare the best caching plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-chart-pie"></i><span class="tit">Analytics</span><span class="desc">Compare the best analytics plugin.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-chart-line"></i><span class="tit">Lead Generation</span><span class="desc">Compare the best lead generation plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-envelope"></i><span class="tit">Email Marketing</span><span class="desc">Compare the best email marketing services.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-history"></i><span class="tit">Backups</span><span class="desc">Compare the best backup plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-search-plus"></i><span class="tit">SEO</span><span class="desc">Compare the best SEO plugins and tools.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-images"></i><span class="tit">Gallery</span><span class="desc">Compare the best gallery plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-bullhorn"></i><span class="tit">Social Media</span><span class="desc">Compare the best social media plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-paint-brush"></i><span class="tit">Page Builders</span><span class="desc">Compare the best page builder plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-calendar-alt"></i><span class="tit">Booking</span><span class="desc">Compare the best booking plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-graduation-cap"></i><span class="tit">LMS</span><span class="desc">Compare the best LMS plugins for WordPress.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-globe"></i><span class="tit">Translation</span><span class="desc">Compare the best translation plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-money-bill-alt"></i><span class="tit">Affiliate</span><span class="desc">Compare the best affiliate plugins.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-comment-alt"></i><span class="tit">Live Chat</span><span class="desc">Compare the best live chat plugins.</span></a>
+            <a href="https://www.isitwp.com/best-business-phone-services/"><i class="fa-2x far fa-phone"></i><span class="tit">Business Phone</span><span class="desc">Compare the best business phone services.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x fal fa-address-book"></i><span class="tit">CRM</span><span class="desc">Compare the best CRM software.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x fal fa-inbox"></i><span class="tit">SMTP</span><span class="desc">Compare the best SMTP services.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-browser"></i><span class="tit">Website Builder</span><span class="desc">Compare the best website builders.</span></a>
+            <a href="https://www.branditprintit.com.ng/blog"><i class="fa-2x far fa-keyboard"></i><span class="tit">Blogging Platform</span><span class="desc">Compare the best blogging platforms.</span></a>
+        </div>
+</div>
+<div class="section optin bg-white">
+    <div class="container clear">
+        <div class="image fleft">
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20164%20212'%3E%3C/svg%3E" alt="WordPress Launch Checklist"
+                 width="164" height="212" loading="lazy" data-lazy-src="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/images/checklist.png"/><noscript><img src="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/images/checklist.png" alt="WordPress Launch Checklist"
+                 width="164" height="212" loading="lazy"/></noscript>
+        </div>
+        <div class="ptin fleft">
+            <h2>The Ultimate WordPress Launch Checklist </h2>
+            <div class="desc">We've compiled all the essential checklist items for your next WordPress website launch
+                into one handy ebook.
+            </div>
+            <a rel="noopener noreferrer" class="manual-optin-trigger"
+               href="https://www.branditprintit.com.ng/blog">Branditprintit.com.ng</a>
+        </div>
+    </div>
+</div>
+<div class="section blog bg-lt-grey">
+    <div class="container">
+        <h2 class="has-undr">Latest from our <span class="hd-blue">Blog</span></h2>
+        			<div class="pst-cont">
+                            <div id="post-268817" class="pst">
+                    <a class="img" href="https://www.branditprintit.com.ng/blog" title="WP Tasty Review: Is It The Best Recipe Plugin?"><img width="330" height="160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20330%20160'%3E%3C/svg%3E" class="attachment-blog-image size-blog-image wp-post-image" alt="WP Tasty Review Is It The Best Recipe Plugin" title="WP Tasty Review Is It The Best Recipe Plugin - IsItWP - Free WordPress Theme Detector" data-lazy-src="https://i0.wp.com/www.branditprintit.com.ng/wp-content/uploads/2023/02/download-3.png?w=225&ssl=1" height="160" src="https://i0.wp.com/www.branditprintit.com.ng/wp-content/uploads/2023/02/download-3.png?w=225&ssl=1" class="attachment-blog-image size-blog-image wp-post-image" alt="WP Tasty Review Is It The Best Recipe Plugin" title="WP Tasty Review Is It The Best Recipe Plugin - IsItWP - Free WordPress Theme Detector" /></noscript></a>
+                    <h2><a href="https://www.branditprintit.com.ng/blog" title="WP Tasty Review: Is It The Best Recipe Plugin?">WP Tasty Review: Is It The Best Recipe Plugin?</a></h2>
+                    <div class="entry-meta">Posted on <time datetime="2023-02-21">Feb 21st, 2023</time> by Melinda Bartley</div>
+                </div>
+			                <div id="post-247418" class="pst">
+                    <a class="img" href="https://www.branditprintit.com.ng/blog" title="7 Best WordPress Recipe Plugins For Your Food Blog"><img width="330" height="160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20330%20160'%3E%3C/svg%3E" class="attachment-blog-image size-blog-image wp-post-image" alt="Best WordPress Recipe Plugins" title="Best WordPress Recipe Plugins - IsItWP - Free WordPress Theme Detector" data-lazy-src="https://www.isitwp.com/wp-content/uploads/2020/08/best-wordpress-recipe-plugins-for-your-food-blog-330x160.png" /><noscript><img width="330" height="160" src="https://www.isitwp.com/wp-content/uploads/2020/08/best-wordpress-recipe-plugins-for-your-food-blog-330x160.png" class="attachment-blog-image size-blog-image wp-post-image" alt="Best WordPress Recipe Plugins" title="Best WordPress Recipe Plugins - IsItWP - Free WordPress Theme Detector" /></noscript></a>
+                    <h2><a href="https://www.branditprintit.com.ng/blog" title="7 Best WordPress Recipe Plugins For Your Food Blog">7 Best WordPress Recipe Plugins For Your Food Blog</a></h2>
+                    <div class="entry-meta">Posted on <time datetime="2023-02-13">Feb 13th, 2023</time> by <a href="https://www.branditprintit.com.ng/blog" title="Visit Editorial Team&#8217;s website" rel="author external">Editorial Team</a></div>
+                </div>
+			                <div id="post-268726" class="pst">
+                    <a class="img" href="https://www.branditprintit.com.ng/blog" title="How to Add a Hotel Room Booking Form in WordPress"><img width="330" height="160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20330%20160'%3E%3C/svg%3E" class="attachment-blog-image size-blog-image wp-post-image" alt="How to create a hotel room booking form" title="How to create a hotel room booking form - IsItWP - Free WordPress Theme Detector" data-lazy-src="https://www.isitwp.com/wp-content/uploads/2023/02/how-to-create-a-hotel-room-booking-form-330x160.png" /><noscript><img width="330" height="160" src="https://www.isitwp.com/wp-content/uploads/2023/02/how-to-create-a-hotel-room-booking-form-330x160.png" class="attachment-blog-image size-blog-image wp-post-image" alt="How to create a hotel room booking form" title="How to create a hotel room booking form - IsItWP - Free WordPress Theme Detector" /></noscript></a>
+                    <h2><a href="https://www.isitwp.com/how-to-add-a-hotel-room-booking-form/" title="How to Add a Hotel Room Booking Form in WordPress">How to Add a Hotel Room Booking Form in WordPress</a></h2>
+                    <div class="entry-meta">Posted on <time datetime="2023-02-09">Feb 9th, 2023</time> by <a href="https://www.isitwp.com/" title="Visit Editorial Team&#8217;s website" rel="author external">Editorial Team</a></div>
+                </div>
+			                <div id="post-247321" class="pst">
+                    <a class="img" href="https://www.isitwp.com/best-cleaning-services-wordpress-themes/" title="17 Best Cleaning Services WordPress Themes in 2023"><img width="330" height="160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20330%20160'%3E%3C/svg%3E" class="attachment-blog-image size-blog-image wp-post-image" alt="Best Cleaning Services WordPress Themes" title="Best Cleaning Services WordPress Themes - IsItWP - Free WordPress Theme Detector" data-lazy-src="https://www.isitwp.com/wp-content/uploads/2020/07/bestcleaningserviceswpthemes-330x160.png" /><noscript><img width="330" height="160" src="https://www.isitwp.com/wp-content/uploads/2020/07/bestcleaningserviceswpthemes-330x160.png" class="attachment-blog-image size-blog-image wp-post-image" alt="Best Cleaning Services WordPress Themes" title="Best Cleaning Services WordPress Themes - IsItWP - Free WordPress Theme Detector" /></noscript></a>
+                    <h2><a href="https://www.isitwp.com/best-cleaning-services-wordpress-themes/" title="17 Best Cleaning Services WordPress Themes in 2023">17 Best Cleaning Services WordPress Themes in 2023</a></h2>
+                    <div class="entry-meta">Posted on <time datetime="2023-02-01">Feb 1st, 2023</time> by <a href="https://www.isitwp.com/" title="Visit Editorial Team&#8217;s website" rel="author external">Editorial Team</a></div>
+                </div>
+			                <div id="post-268688" class="pst">
+                    <a class="img" href="https://www.isitwp.com/wordpress-plugins/duplicator/" title="Duplicator Review: We Tested Their Backups &#038; Migration"><img width="330" height="160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20330%20160'%3E%3C/svg%3E" class="attachment-blog-image size-blog-image wp-post-image" alt="" title="Duplicator review best backup plugin - IsItWP - Free WordPress Theme Detector" data-lazy-src="https://www.isitwp.com/wp-content/uploads/2023/01/duplicator-review-best-backup-plugin-330x160.png" /><noscript><img width="330" height="160" src="https://www.isitwp.com/wp-content/uploads/2023/01/duplicator-review-best-backup-plugin-330x160.png" class="attachment-blog-image size-blog-image wp-post-image" alt="" title="Duplicator review best backup plugin - IsItWP - Free WordPress Theme Detector" /></noscript></a>
+                    <h2><a href="https://www.isitwp.com/wordpress-plugins/duplicator/" title="Duplicator Review: We Tested Their Backups &#038; Migration">Duplicator Review: We Tested Their Backups &#038; Migration</a></h2>
+                    <div class="entry-meta">Posted on <time datetime="2023-01-26">Jan 26th, 2023</time> by Melinda Bartley</div>
+                </div>
+			                <div id="post-248032" class="pst">
+                    <a class="img" href="https://www.isitwp.com/best-wordpress-animation-plugins/" title="9 Best WordPress Animation Plugins for 2023 (Compared)"><img width="330" height="160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20330%20160'%3E%3C/svg%3E" class="attachment-blog-image size-blog-image wp-post-image" alt="best animation plugins for wordpress" title="best animation plugins for wordpress - IsItWP - Free WordPress Theme Detector" data-lazy-src="https://www.isitwp.com/wp-content/uploads/2020/08/best-animation-plugins-for-wordpress-330x160.jpg" /><noscript><img width="330" height="160" src="https://www.isitwp.com/wp-content/uploads/2020/08/best-animation-plugins-for-wordpress-330x160.jpg" class="attachment-blog-image size-blog-image wp-post-image" alt="best animation plugins for wordpress" title="best animation plugins for wordpress - IsItWP - Free WordPress Theme Detector" /></noscript></a>
+                    <h2><a href="https://www.isitwp.com/best-wordpress-animation-plugins/" title="9 Best WordPress Animation Plugins for 2023 (Compared)">9 Best WordPress Animation Plugins for 2023 (Compared)</a></h2>
+                    <div class="entry-meta">Posted on <time datetime="2023-01-23">Jan 23rd, 2023</time> by <a href="https://www.isitwp.com/" title="Visit Editorial Team&#8217;s website" rel="author external">Editorial Team</a></div>
+                </div>
+						</div>
+                <a class="ctabl" href="https://www.isitwp.com/blog/" title="See all articles">See All Articles &raquo;</a>
+            </div>
+</div>
+	<div class="section optin bg-white">
+    <div class="container clear">
+        <div class="image fleft">
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20164%20212'%3E%3C/svg%3E" alt="WordPress Launch Checklist"
+                 width="164" height="212" loading="lazy" data-lazy-src="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/images/checklist.png"/><noscript><img src="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/images/checklist.png" alt="WordPress Launch Checklist"
+                 width="164" height="212" loading="lazy"/></noscript>
+        </div>
+        <div class="ptin fleft">
+            <h2>The Ultimate WordPress Launch Checklist </h2>
+            <div class="desc">We've compiled all the essential checklist items for your next WordPress website launch
+                into one handy ebook.
+            </div>
+            <a rel="noopener noreferrer" class="manual-optin-trigger"
+               href="https://app.monstercampaigns.com/c/ony5jncd9fup3eyssxo0/" target="_blank">Yes, Send Me the Free
+                eBook!</a>
+        </div>
+    </div>
+</div>
+	</div><!-- #content -->
+		<footer id="footer">
+		<div class="container clear">
+			<div class="abt">
+				<h3>About IsItWP</h3>
+				<div class="desc">
+					IsItWP is a free online resource that offers WordPress tutorials, tools, product reviews, and other resources to help you build a better WordPress website.
+				</div>
+			</div>
+			<div class="mnu">
+				<h3>Site Links</h3>
+				<ul><li><span title="-- Sections --">-- Sections --</span><ul class="sub-sub"><li><a title="Best WordPress Plugins" href="https://www.isitwp.com/top-wordpress-plugins/">Best WordPress Plugins</a></li><li><a title="Best WordPress Themes" href="https://www.isitwp.com/top-wordpress-themes/">Best WordPress Themes</a></li><li><a title="Best Web Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/">Best Web Hosting Reviews</a></li><li><a title="Best WordPress Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/wordpress/">Best WordPress Hosting Reviews</a></li><li><a title="Best Cheap Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/cheap-hosting-reviews/">Best Cheap Hosting Reviews</a></li><li><a title="Best Free Web Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/free-web-hosting/">Best Free Web Hosting Reviews</a></li><li><a title="WooCommerce Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/woocommerce/">WooCommerce Hosting Reviews</a></li><li><a title="Best Blog Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/blog/">Best Blog Hosting Reviews</a></li><li><a title="eCommerce Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/ecommerce/">eCommerce Hosting Reviews</a></li><li><a title="Best Reseller Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/reseller/">Best Reseller Hosting Reviews</a></li><li><a title="Managed WP Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/managed-wordpress-hosting-reviews/">Managed WP Hosting Reviews</a></li><li><a title="Best VPS Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/vps/">Best VPS Hosting Reviews</a></li><li><a title="Best Dedicated Hosting Reviews" href="https://www.isitwp.com/hosting-reviews/dedicated/">Best Dedicated Hosting Reviews</a></li></ul></li><li><span title="-- Reviews --">-- Reviews --</span><ul class="sub-sub"><li><a title="Bluehost Review" href="https://www.isitwp.com/hosting-reviews/bluehost-review/">Bluehost Review</a></li><li><a title="SiteGround Review" href="https://www.isitwp.com/hosting-reviews/siteground-review/">SiteGround Review</a></li><li><a title="DreamHost Review" href="https://www.isitwp.com/hosting-reviews/dreamhost-review/">DreamHost Review</a></li><li><a title="WPEngine Review" href="https://www.isitwp.com/hosting-reviews/wpengine-review/">WPEngine Review</a></li><li><a title="HostGator Review" href="https://www.isitwp.com/hosting-reviews/hostgator-review/">HostGator Review</a></li></ul></li><li><span title="-- Coupons --">-- Coupons --</span><ul class="sub-sub"><li><a title="WPEngine Coupon" href="https://www.isitwp.com/coupons/wpengine/">WPEngine Coupon</a></li><li><a title="SiteGround Coupon" href="https://www.isitwp.com/coupons/siteground/">SiteGround Coupon</a></li><li><a title="Bluehost Coupon" href="https://www.isitwp.com/coupons/bluehost/">Bluehost Coupon</a></li><li><a title="WPForms Coupon" href="https://www.isitwp.com/coupons/wpforms/">WPForms Coupon</a></li><li><a title="GoDaddy Coupon" href="https://www.isitwp.com/coupons/godaddy/">GoDaddy Coupon</a></li><li><a title="DreamHost Coupon" href="https://www.isitwp.com/coupons/dreamhost/">DreamHost Coupon</a></li><li><a title="GreenGeeks Coupon" href="https://www.isitwp.com/coupons/greengeeks/">GreenGeeks Coupon</a></li><li><a title="HostGator Coupon" href="https://www.isitwp.com/coupons/hostgator/">HostGator Coupon</a></li><li><a title="iPage Coupon" href="https://www.isitwp.com/coupons/ipage/">iPage Coupon</a></li><li><a title="InMotion Hosting Coupon" href="https://www.isitwp.com/coupons/inmotion-hosting/">InMotion Hosting Coupon</a></li><li><a title="OptinMonster Coupon" href="https://www.isitwp.com/coupons/optinmonster/">OptinMonster Coupon</a></li></ul></li></ul>			</div>
+			<div class="cmp">
+				<h3>Company</h3>
+				<div class="desc">
+					<a href="/about/">About Us</a>
+					<a href="/contact-us/">Contact Us</a>
+					<a href="/privacy-policy/">Privacy Policy</a>
+					<a href="/terms-of-service/">Terms of Service</a>
+					<a href="/ftc-disclosure/">FTC Disclosure</a>
+					<a href="https://www.isitwp.com/sitemap_index.xml">Sitemap</a>
+				</div>
+			</div>
+			<div class="os">
+				<h3>Our Sites</h3>
+				<div class="desc">
+					<a rel="noopener noreferrer" target="_blank" href="https://optinmonster.com/?utm_source=isitwp&utm_campaign=footerlink">OptinMonster</a>
+					<a rel="noopener noreferrer" target="_blank" href="https://wpforms.com/?utm_source=isitwp&utm_campaign=footerlink">WPForms</a>
+					<a rel="noopener noreferrer" target="_blank" href="https://www.monsterinsights.com/?utm_source=isitwp&utm_campaign=footerlink">MonsterInsights</a>
+					<a rel="noopener noreferrer" target="_blank" href="https://www.seedprod.com/?utm_source=isitwp&utm_campaign=footerlink">SeedProd</a>
+					<a rel="noopener noreferrer" target="_blank" href="https://rafflepress.com/?utm_source=isitwp&utm_campaign=footerlink">RafflePress</a>
+					<a rel="noopener noreferrer" target="_blank" href="https://wpmailsmtp.com/?utm_source=isitwp&utm_campaign=footerlink">WP Mail SMTP</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<div class="footer-cr bg-lt-grey">
+		<div class="container">
+			Copyright &copy; 2015 - 2023 <a rel="noopener noreferrer" target="_blank" href="https://www.wpbeginner.com/?utm_source=isitwp&utm_campaign=footerlink">WPBeginner LLC</a>. All Rights Reserved. Managed by <a rel="noopener noreferrer" href="https://awesomemotive.com" target="_blank">Awesome Motive Inc</a>.
+			<br /><br />
+			<div class="italic">
+				EDITORIAL NOTE: Opinions expressed here are author’s alone, not those of any hosting company, plugin provider, theme company, <a rel="noopener noreferrer" href="https://syedbalkhi.com/?utm_source=isitwp&utm_campaign=footerlink" target="_blank" rel="noopener">Syed Balkhi</a> or WordPress Foundation, and have not been reviewed, approved or otherwise endorsed by any of these entities.
+				<br /><br />
+				DISCLAIMER: We make great efforts to maintain reliable data on all offers presented. However, this data is provided without warranty. Users should always check the provider’s official website for current terms and details. The product offers that appear on the website are from respective hosting companies, plugin companies, and theme companies from which IsItWP receives compensation. This compensation may impact how and where products appear on this site (including, for example, the order in which they appear). This site does not include all WordPress products or all available product offers.
+			</div>
+		</div>
+	</div>
+</div><!-- #page -->
+    <link rel="preload" as="font" href="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/webfonts/fa-light-300.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/webfonts/fa-regular-400.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/webfonts/fa-solid-900.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/webfonts/fa-brands-400.woff2" type="font/woff2" crossorigin />
+    <link rel='stylesheet' media="print" onload="this.media='all'" href="https://www.isitwp.com/wp-content/themes/isitwpv2/assets/css/fontawesome-all.min.css" />
+        <style>
+            body .syntaxhighlighter table td.code .container textarea {
+                white-space: pre-wrap !important;
+            }
+
+            body .syntaxhighlighter .line {
+                white-space: pre-wrap !important;
+            }
+        </style>
+        <script type="rocketlazyloadscript">
+            (function ($) {
+                var sh3MaxRetries = 10,
+                    syntaxHighlighterTracker = 0;
+                var syntaxHighlighterWrap = function () {
+                    $('.syntaxhighlighter').each(function () {
+                        var $syntaxPalette = $(this),
+                            $codePalette = $syntaxPalette.find('td.code'),
+                            $lineNos = $syntaxPalette.find('td.gutter');
+                        /* go through each line in the code palette */
+                        $lineNos.children('.line').each(function (i) {
+                            var height = $codePalette.find('.line:nth-child(' + (i + 1) + ')').height() || 0;
+                            if (!height) {
+                                height = 'auto';
+                            } else {
+                                height = height += 'px';
+                            }
+                            /* update line number height with code palette line height */
+                            $(this).attr('style', 'height: ' + height + ' !important;');
+                        });
+                    });
+                };
+                var waitForSyntaxHighlighterToLoad = function () {
+                    /* check max retries */
+                    if (++syntaxHighlighterTracker > sh3MaxRetries) {
+                        return;
+                    }
+                    if ($('.syntaxhighlighter').length === 0) {
+                        /* wait for syntax highlighter to initialize */
+                        setTimeout(waitForSyntaxHighlighterToLoad, 800);
+                    } else {
+                        syntaxHighlighterWrap();
+                    }
+                };
+                waitForSyntaxHighlighterToLoad();
+            }(window.jQuery));
+        </script>
+        <!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: Sidebar newsletter icon (MonsterLink) -->
+<script type="rocketlazyloadscript">(function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.campaign=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,1,'k8wtobk9c58c2uoqhkoy');</script>
+<!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: IsItWP Launch Checklist (Exit Intent) -->
+<script type="rocketlazyloadscript">(function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.campaign=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,1,'p3hlluste6rln9l9s9my');</script>
+<!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: IsItWP Launch Checklist (MonsterLink) -->
+<script type="rocketlazyloadscript">(function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.campaign=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,1,'ony5jncd9fup3eyssxo0');</script>
+<!-- / OptinMonster --><script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) || ( typeof(__gtagTracker) !== 'undefined' && __gtagTracker ) ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+											var type        = 'event';
+	var eventName   = action;
+	var fieldsArray = {
+		event_category : 'Scroll Depth',
+		event_label    : label,
+		value          : 1,
+		non_interaction: true,
+		send_to: 'UA-68663830-1'
+	};
+
+	MonsterInsightsObject.sendEvent( type, eventName, fieldsArray );
+
+	if (arguments.length > 3) {
+		var type        = 'event';
+		var eventName   = 'timing_complete';
+		fieldsArray = {
+			event_category : 'Scroll Depth',
+			name           : action,
+			event_label    : label,
+			value          : timing,
+			non_interaction: 1,
+			send_to: 'UA-68663830-1'
+		};
+
+		MonsterInsightsObject.sendEvent( type, eventName, fieldsArray );
+	}
+		var paramName = action.toLowerCase();
+	var fieldsArray = {
+		send_to: 'G-5MF7PM2SZF',
+		non_interaction: true
+	};
+	fieldsArray[paramName] = label;
+
+	if (arguments.length > 3) {
+		fieldsArray.scroll_timing = timing
+		MonsterInsightsObject.sendEvent('event', 'scroll_depth', fieldsArray);
+	} else {
+		MonsterInsightsObject.sendEvent('event', 'scroll_depth', fieldsArray);
+	}
+										}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script>		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		var k8wtobk9c58c2uoqhkoy_shortcode = true;var p3hlluste6rln9l9s9my_shortcode = true;var ony5jncd9fup3eyssxo0_shortcode = true;		</script>
+		<script type='text/javascript' id='toc-front-js-extra'>
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.isitwp.com/wp-content/plugins/table-of-contents-plus/front.min.js?ver=2106' id='toc-front-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/www.isitwp.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript">(function(d){var s=d.createElement("script");s.type="text/javascript";s.src="https://a.omappapi.com/app/js/api.min.js";s.async=true;s.id="omapi-script";d.getElementsByTagName("head")[0].appendChild(s);})(document);</script><script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.isitwp.com/wp-content/themes/isitwpv2/assets/js/common.js?ver=3.7.3' id='iw-common-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.isitwp.com/wp-content/themes/isitwpv2/assets/js/tool_isitwp.js?ver=3.7.3' id='iw-tool-js' defer></script>
+<script type='text/javascript' src='https://www.isitwp.com/wp-includes/js/wp-embed.min.js?ver=5.8.6' id='wp-embed-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.isitwp.com/wp-content/plugins/optinmonster/assets/dist/js/helper.min.js?ver=2.11.1' id='optinmonster-wp-helper-js' defer></script>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">var omapi_localized = {
+			ajax: 'https://www.isitwp.com/wp-admin/admin-ajax.php?optin-monster-ajax-route=1',
+			nonce: 'c533cab717',
+			slugs:
+			{"k8wtobk9c58c2uoqhkoy":{"slug":"k8wtobk9c58c2uoqhkoy","mailpoet":false},"p3hlluste6rln9l9s9my":{"slug":"p3hlluste6rln9l9s9my","mailpoet":false},"ony5jncd9fup3eyssxo0":{"slug":"ony5jncd9fup3eyssxo0","mailpoet":false}}		};</script>
+				<script type="rocketlazyloadscript" data-rocket-type="text/javascript">var omapi_data = {"wc_cart":[],"object_id":4,"object_key":"page","object_type":"post","term_ids":[],"wp_json":"https:\/\/www.isitwp.com\/wp-json"};</script>
+		<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.isitwp.com/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '670379529714912']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<!-- Drip -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+  var _dcq = _dcq || [];
+  var _dcs = _dcs || {};
+  _dcs.account = '4208975';
+
+  (function() {
+    var dc = document.createElement('script');
+    dc.type = 'text/javascript'; dc.async = true;
+    dc.src = '//tag.getdrip.com/4208975.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(dc, s);
+  })();
+</script>
+<!-- end Drip -->
+</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1676972115 -->
+
